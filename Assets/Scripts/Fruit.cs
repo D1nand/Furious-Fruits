@@ -5,6 +5,7 @@ using UnityEngine;
 public class Fruit : MonoBehaviour
 {
     public Rigidbody rb;
+    public TrailRenderer trailRenderer;
     public float releaseTime = 0.2f;
 
     private bool isPressed = false;
@@ -18,6 +19,7 @@ public class Fruit : MonoBehaviour
         springJoint = GetComponent<SpringJoint>();
         cameraFollow = Camera.main.GetComponent<CameraFollow>(); // Assuming the camera is tagged as "MainCamera"
         rb.constraints = RigidbodyConstraints.FreezePosition;
+        trailRenderer.enabled = false;
     }
 
     void Update()
@@ -51,8 +53,9 @@ public class Fruit : MonoBehaviour
         yield return new WaitForSeconds(releaseTime);
 
         Destroy(springJoint);
+        trailRenderer.enabled = true;
 
-        
+
         hasReleased = true; 
     }
     public bool HasReleased()
