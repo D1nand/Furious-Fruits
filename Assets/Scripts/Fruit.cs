@@ -6,6 +6,7 @@ public class Fruit : MonoBehaviour
 {
     public Rigidbody rb;
     public float releaseTime = 0.2f;
+    public TrailRenderer trailRenderer;
 
     private bool isPressed = false;
     private SpringJoint springJoint;
@@ -18,6 +19,7 @@ public class Fruit : MonoBehaviour
         springJoint = GetComponent<SpringJoint>();
         cameraFollow = Camera.main.GetComponent<CameraFollow>(); // Assuming the camera is tagged as "MainCamera"
         rb.constraints = RigidbodyConstraints.FreezePosition;
+        trailRenderer.enabled = false;
     }
 
     void Update()
@@ -51,15 +53,8 @@ public class Fruit : MonoBehaviour
         yield return new WaitForSeconds(releaseTime);
 
         hasReleased = true;
-
-        Destroy(springJoint);
-<<<<<<< Updated upstream
-
-        
-        hasReleased = true; 
-=======
         trailRenderer.enabled = true;
->>>>>>> Stashed changes
+        Destroy(springJoint);
     }
 
     public bool HasReleased()

@@ -173,8 +173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 359833542171684210}
-  trailRenderer: {fileID: 8059205736010170181}
   releaseTime: 0.3
+  trailRenderer: {fileID: 8059205736010170181}
 --- !u!96 &8059205736010170181
 TrailRenderer:
   serializedVersion: 3
