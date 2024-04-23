@@ -2,23 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class ObstacleFreeze : MonoBehaviour
 {
     public Transform fruit;
-    public Vector3 offset;
+    public Rigidbody rb;
+    void Start()
+    {
+    }
 
-    public void Update()
+    
+    void Update()
     {
         if (fruit != null && fruit.GetComponent<Fruit>() != null && fruit.GetComponent<Fruit>().HasReleased())
         {
-            FollowAfterRelease();
+            rb.constraints = RigidbodyConstraints.None;
         }
-
-
-    }
-    public void FollowAfterRelease()
-    {
-        transform.position = fruit.position + offset;
     }
 }
-

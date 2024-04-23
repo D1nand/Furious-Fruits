@@ -50,11 +50,18 @@ public class Fruit : MonoBehaviour
     {
         yield return new WaitForSeconds(releaseTime);
 
+        hasReleased = true;
+
         Destroy(springJoint);
+<<<<<<< Updated upstream
 
         
         hasReleased = true; 
+=======
+        trailRenderer.enabled = true;
+>>>>>>> Stashed changes
     }
+
     public bool HasReleased()
     {
         return hasReleased;
