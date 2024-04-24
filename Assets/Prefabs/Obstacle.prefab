@@ -146,5 +146,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11e78010afbe1042b4b654e855c27e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fruit: {fileID: 556813715932731991, guid: 85e3931425b59984db72c5bd215bb0e4, type: 3}
+  fruit: {fileID: 0}
   rb: {fileID: 8000050364221921780}
