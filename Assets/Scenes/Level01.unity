@@ -748,6 +748,11 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.y
       value: 0.1500001
       objectReference: {fileID: 0}
+    - target: {fileID: 8059205736010170181, guid: 85e3931425b59984db72c5bd215bb0e4,
+        type: 3}
+      propertyPath: m_Time
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
