@@ -146,3 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22256fb40f3cc7e43ac0068c01c64dcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fruitCollider: {fileID: 8458044295394419123, guid: 85e3931425b59984db72c5bd215bb0e4,
+    type: 3}
+  obstacleCollider: {fileID: 7583879489949942474, guid: 34104a670428d284382a4ac8641da383,
+    type: 3}

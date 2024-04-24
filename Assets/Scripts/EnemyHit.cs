@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class EnemyHit : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Collider fruitCollider;
+    public Collider obstacleCollider;
 
-    // Update is called once per frame
-    void Update()
+    void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.collider == fruitCollider || collision.collider == obstacleCollider)
+        {
+            Destroy(gameObject);
+        }
     }
 }
