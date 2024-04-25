@@ -1,24 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
     public Transform fruit;
     public Vector3 offset;
+    public Camera cinematicCamera;
+    public Camera mainCamera;
 
-    public void Update()
+
+    void Update()
     {
-        if (fruit != null && fruit.GetComponent<Fruit>() != null && fruit.GetComponent<Fruit>().HasReleased())
+        if (fruit != null && fruit.GetComponent<Fruit>() != null)
         {
-            FollowAfterRelease();
+            if (fruit.GetComponent<Fruit>().HasReleased())
+            {
+                mainCamera.gameObject.SetActive(true);
+                cinematicCamera.gameObject.SetActive(false);
+
+                transform.position = fruit.position + offset;
+            }
         }
-
-
-    }
-    public void FollowAfterRelease()
-    {
-        transform.position = fruit.position + offset;
     }
 }
-
