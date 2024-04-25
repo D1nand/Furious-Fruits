@@ -196,6 +196,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34104a670428d284382a4ac8641da383, type: 3}
+--- !u!1 &169759351 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4283850234288212654, guid: 85e3931425b59984db72c5bd215bb0e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1766664739}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &264903214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -562,6 +568,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roundOver: {fileID: 808208065}
+  fruitPrefab: {fileID: 169759351}
+  fruit: {fileID: 969879197}
+  spawnPosition: {fileID: 895667552}
+  mainCamera: {fileID: 763025650}
+  cameraFollow: {fileID: 763025647}
+  hookRigidbody: {fileID: 895667551}
 --- !u!4 &534344281
 Transform:
   m_ObjectHideFlags: 0
@@ -614,6 +626,7 @@ MonoBehaviour:
   offset: {x: -5, y: 0.3, z: 0}
   cinematicCamera: {fileID: 2024554817}
   mainCamera: {fileID: 763025650}
+  enemyManager: {fileID: 534344280}
 --- !u!114 &763025648
 MonoBehaviour:
   m_ObjectHideFlags: 0

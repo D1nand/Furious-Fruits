@@ -6,19 +6,39 @@ public class CameraFollow : MonoBehaviour
     public Vector3 offset;
     public Camera cinematicCamera;
     public Camera mainCamera;
+    public EnemyManager enemyManager;
 
+    private Vector3 originalPosition;
+
+    void Start()
+    {
+        originalPosition = transform.position;
+    }
 
     void Update()
     {
-        if (fruit != null && fruit.GetComponent<Fruit>() != null)
+        if (enemyManager != null && !enemyManager.HasSpawned()) // Check if enemyManager exists and has not spawned
         {
-            if (fruit.GetComponent<Fruit>().HasReleased())
+            if (fruit != null && fruit.GetComponent<Fruit>() != null)
             {
-                mainCamera.gameObject.SetActive(true);
-                cinematicCamera.gameObject.SetActive(false);
+                if (fruit.GetComponent<Fruit>().HasReleased())
+                {
+                    mainCamera.gameObject.SetActive(true);
+                    cinematicCamera.gameObject.SetActive(false);
 
-                transform.position = fruit.position + offset;
+                    transform.position = fruit.position + offset;
+                }
             }
         }
+        else
+        {
+            ResetCameraPosition();
+        }
+    }
+
+
+    public void ResetCameraPosition()
+    {
+        transform.position = originalPosition;
     }
 }
