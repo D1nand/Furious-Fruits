@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class EnemyHit : MonoBehaviour
 {
-    public Collider fruitCollider;
-    public Collider obstacleCollider;
+    public Collider fruitCollider; // asks for the collider of fruit
+    public Collider obstacleCollider; // asks for the collider of obstacle
 
     void OnCollisionEnter(Collision collision)
     {
         if (collision.collider == fruitCollider || collision.collider == obstacleCollider)
-        {
-            Destroy(gameObject);
+        { // checks if they collide with Enemy
+            Destroy(gameObject); // removes enemy from the game / dies
         }
     }
 }

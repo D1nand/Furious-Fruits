@@ -7,10 +7,10 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync(0);
+        SceneManager.LoadSceneAsync(0); // when clicked on "Play" it loads level01
     }
     public void Quit()
     {
-        Application.Quit();
+        Application.Quit(); // only works when not locally tested, but it quits the game
     }
 }

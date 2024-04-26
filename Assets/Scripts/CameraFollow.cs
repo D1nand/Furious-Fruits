@@ -12,7 +12,7 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
-        originalPosition = transform.position;
+        originalPosition = transform.position; // sets the original position to the position i placed him in the start
     }
 
     void Update()
@@ -20,9 +20,9 @@ public class CameraFollow : MonoBehaviour
         if (enemyManager != null && !enemyManager.HasSpawned()) // Check if enemyManager exists and has not spawned
         {
             if (fruit != null && fruit.GetComponent<Fruit>() != null)
-            {
+            { // checks if fruit exists
                 if (fruit.GetComponent<Fruit>().HasReleased())
-                {
+                { // checks if the boolean is true
                     mainCamera.gameObject.SetActive(true);
                     cinematicCamera.gameObject.SetActive(false);
 
@@ -32,13 +32,13 @@ public class CameraFollow : MonoBehaviour
         }
         else
         {
-            ResetCameraPosition();
+            ResetCameraPosition(); // calls function
         }
     }
 
 
     public void ResetCameraPosition()
     {
-        transform.position = originalPosition;
+        transform.position = originalPosition; // sets camera function to the original
     }
 }
