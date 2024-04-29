@@ -12,7 +12,7 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
-        originalPosition = transform.position; // sets the original position to the position i placed him in the start
+        originalPosition = transform.position;
     }
 
     void Update()
