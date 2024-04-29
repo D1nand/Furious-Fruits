@@ -39,7 +39,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    // kdfjks
+    // kdfjksd
     IEnumerator SpawnFruitAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
