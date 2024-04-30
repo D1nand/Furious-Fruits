@@ -10,6 +10,7 @@ public class EnemyManager : MonoBehaviour
     public Camera mainCamera; // main camera
     public CameraFollow cameraFollow; // CameraFollow script
     public Rigidbody hookRigidbody; // rigidbody of the hook used for clone
+    public GameObject cloneSpawn;
 
     private bool gameOver = false;
     private bool fruitSpawned = false;
@@ -39,11 +40,6 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    // kdfjksd
-
-
-
-
     IEnumerator SpawnFruitAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -55,18 +51,29 @@ public class EnemyManager : MonoBehaviour
 
     void SpawnFruit()
     {
-        if (fruitPrefab != null && fruit != null && hookRigidbody != null)
-        { // checks if fruitprefab fruit and hookRigidbody exist
-            GameObject newFruit = Instantiate(fruitPrefab, spawnPosition.position, Quaternion.identity);
-            SpringJoint springJoint = newFruit.AddComponent<SpringJoint>();
+        if (fruit != null && hookRigidbody != null && cloneSpawn != null)
+        {
+            // Reset the position of the existing fruit to the cloneSpawn position
+            fruit.position = cloneSpawn.transform.position;
+
+            // Add the spring joint back
+            SpringJoint springJoint = fruit.GetComponent<SpringJoint>();
+            if (springJoint == null)
+            {
+                springJoint = fruit.gameObject.AddComponent<SpringJoint>();
+            }
             springJoint.connectedBody = hookRigidbody;
-            // creates new fruit and connects the springJoint to the hook
+
+            hasSpawned = true; // Set hasSpawned to true after resetting the fruit
+            cameraFollow.ResetCameraPosition(); // Reset camera position to follow fruit.
         }
         else
         {
-            Debug.LogError("FruitPrefab, Fruit, or Hook Rigidbody is not assigned!");
+            Debug.LogError("Fruit, Hook Rigidbody, or Clone Spawn is not assigned!");
         }
     }
+
+
     public bool HasSpawned()
     {
         return hasSpawned;

@@ -574,6 +574,7 @@ MonoBehaviour:
   mainCamera: {fileID: 763025650}
   cameraFollow: {fileID: 763025647}
   hookRigidbody: {fileID: 895667551}
+  cloneSpawn: {fileID: 591655085}
 --- !u!4 &534344281
 Transform:
   m_ObjectHideFlags: 0
@@ -588,6 +589,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1885464928}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &591655085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 591655086}
+  m_Layer: 0
+  m_Name: SpawnLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &591655086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591655085}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &763025645
@@ -1956,6 +1988,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 359833542171684210, guid: 85e3931425b59984db72c5bd215bb0e4,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 556813715932731991, guid: 85e3931425b59984db72c5bd215bb0e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2031,6 +2068,16 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.y
       value: 0.1500001
       objectReference: {fileID: 0}
+    - target: {fileID: 8010141173167410719, guid: 85e3931425b59984db72c5bd215bb0e4,
+        type: 3}
+      propertyPath: cloneSpawn
+      value: 
+      objectReference: {fileID: 591655085}
+    - target: {fileID: 8010141173167410719, guid: 85e3931425b59984db72c5bd215bb0e4,
+        type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 591655086}
     - target: {fileID: 8059205736010170181, guid: 85e3931425b59984db72c5bd215bb0e4,
         type: 3}
       propertyPath: m_Time
@@ -2258,3 +2305,4 @@ SceneRoots:
   - {fileID: 808208069}
   - {fileID: 975876540}
   - {fileID: 534344281}
+  - {fileID: 591655086}

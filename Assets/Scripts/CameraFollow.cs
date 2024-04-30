@@ -12,33 +12,48 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
-        originalPosition = transform.position; // sets the original position to the position i placed him in the start
+        originalPosition = transform.position;
     }
 
     void Update()
     {
-        if (enemyManager != null && !enemyManager.HasSpawned()) // Check if enemyManager exists and has not spawned
+        Fruit fruitScript = fruit.GetComponent<Fruit>();
+        if (enemyManager != null && !enemyManager.HasSpawned())
         {
             if (fruit != null && fruit.GetComponent<Fruit>() != null)
-            { // checks if fruit exists
-                if (fruit.GetComponent<Fruit>().HasReleased())
-                { // checks if the boolean is true
-                    mainCamera.gameObject.SetActive(true);
-                    cinematicCamera.gameObject.SetActive(false);
+            {
+                if (fruitScript.HasReleased())
+                {
+                    if (!fruitScript.Reset()) {
+                        mainCamera.gameObject.SetActive(true);
+                        cinematicCamera.gameObject.SetActive(false);
 
-                    transform.position = fruit.position + offset;
+                        transform.position = fruit.position + offset;
+                    }
+                }
+                else
+                {
+                    // Reset the camera position when the fruit is reset
+                    ResetCameraPosition();
                 }
             }
         }
         else
         {
-            ResetCameraPosition(); // calls function
+            ResetCameraPosition();
+        }
+        if (!fruitScript.Reset() && fruitScript.HasReleased())
+        {
+            transform.position = fruit.position + offset;
+        }
+        else
+        {
+            ResetCameraPosition();
         }
     }
 
-
     public void ResetCameraPosition()
     {
-        transform.position = originalPosition; // sets camera function to the original
+        transform.position = originalPosition;
     }
 }
