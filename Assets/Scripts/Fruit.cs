@@ -4,7 +4,7 @@ using UnityEngine;
 public class Fruit : MonoBehaviour
 {
     public Rigidbody rb;
-    public float releaseTime = 0.2f;
+    public float releaseTime = 0.1f;
     public TrailRenderer trailRenderer;
     public Transform spawnPoint; // New field to hold the spawn point for the fruit
     public bool reset = false;
