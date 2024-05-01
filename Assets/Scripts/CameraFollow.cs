@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class CameraFollow : MonoBehaviour
     public Camera cinematicCamera;
     public Camera mainCamera;
     public EnemyManager enemyManager;
+    public TextMeshProUGUI Score;
 
     private Vector3 originalPosition;
 
@@ -27,6 +29,7 @@ public class CameraFollow : MonoBehaviour
                     if (!fruitScript.Reset()) {
                         mainCamera.gameObject.SetActive(true);
                         cinematicCamera.gameObject.SetActive(false);
+                        Score.gameObject.SetActive(true);
 
                         transform.position = fruit.position + offset;
                     }

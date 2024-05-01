@@ -1,24 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHit : MonoBehaviour
 {
-    public Collider fruitCollider; // asks for the collider of fruit
-    public Collider obstacleCollider; // asks for the collider of obstacle
-    public float deadlyHeight = 1f;
+    public Collider fruitCollider; // Collider of fruit
+    public Collider obstacleCollider; // Collider of obstacle
+    public float deadlyHeight = 1f; // Height at which the cube should fall to its death
     private Rigidbody rb; // Rigidbody component of the cube
+    private ScoreManager scoreManager; // Reference to the ScoreManager script
 
     void Start()
     {
         rb = GetComponent<Rigidbody>(); // Get the Rigidbody component
+        scoreManager = FindObjectOfType<ScoreManager>(); // Find the ScoreManager in the scene
     }
 
     void OnCollisionEnter(Collision collision)
     {
         if (collision.collider == fruitCollider || collision.collider == obstacleCollider)
-        { // checks if they collide with Enemy
-            Destroy(gameObject); // removes enemy from the game / dies
+        { // Check if collided with fruit or obstacle
+            Die(); // Call the method to make the cube die
         }
     }
 
@@ -26,14 +26,13 @@ public class EnemyHit : MonoBehaviour
     {
         if (transform.position.y <= deadlyHeight)
         { // Check if cube's Y position is less than or equal to deadlyHeight
-            FallToDeath(); // Call the method to make the cube fall to its death
+            Die(); // Call the method to make the cube die
         }
     }
 
-        void FallToDeath()
-        {
-            rb.useGravity = true; // Enable gravity to make the cube fall
-                                  // You might want to add additional effects or animations here
-            Destroy(gameObject); // Destroy the cube after a delay
-        }
+    void Die()
+    {
+        scoreManager.AddScore(100); // Add 100 points to the score
+        Destroy(gameObject); // Destroy the cube
+    }
 }
