@@ -11,10 +11,12 @@ public class EnemyManager : MonoBehaviour
     public CameraFollow cameraFollow; // CameraFollow script
     public Rigidbody hookRigidbody; // rigidbody of the hook used for clone
     public GameObject cloneSpawn;
+    public GameObject gameOverCanvas;
 
     private bool gameOver = false;
     private bool fruitSpawned = false;
     private bool hasSpawned = false;
+    private int spawnedFruitCount = 0; // Counter for spawned fruits
 
     void Update()
     {
@@ -23,11 +25,15 @@ public class EnemyManager : MonoBehaviour
             StartCoroutine(ActivateRoundOver()); // calls function
             gameOver = true; // changes boolean to true
         }
-        else if (fruit.GetComponent<Fruit>().HasReleased() && !gameOver && !fruitSpawned && spawnPosition != null)
+        else if (fruit.GetComponent<Fruit>().HasReleased() && !gameOver && !fruitSpawned && spawnPosition != null && spawnedFruitCount < 3)
         { // if fruit is released but the game isn't over and there hasn't been another fruit spawned
-            
+
             StartCoroutine(SpawnFruitAfterDelay(10f)); // calls function with 10 seconds delay
             fruitSpawned = true; // changes boolean to true
+        }
+        if(spawnedFruitCount >= 3)
+        {
+            gameOverCanvas.SetActive(true);
         }
     }
 
@@ -46,8 +52,10 @@ public class EnemyManager : MonoBehaviour
         SpawnFruit(); // calls function
 
         hasSpawned = true; // changes boolean to true
+        fruitSpawned = false; // Reset fruitSpawned to false after spawning a fruit
         cameraFollow.ResetCameraPosition(); // resets camera position to follow clone.
     }
+
 
     void SpawnFruit()
     {
@@ -66,6 +74,8 @@ public class EnemyManager : MonoBehaviour
 
             hasSpawned = true; // Set hasSpawned to true after resetting the fruit
             cameraFollow.ResetCameraPosition(); // Reset camera position to follow fruit.
+
+            spawnedFruitCount++; // Increment spawned fruit count
         }
         else
         {
@@ -73,11 +83,9 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-
     public bool HasSpawned()
     {
         return hasSpawned;
-
         // returns boolean
     }
 }
