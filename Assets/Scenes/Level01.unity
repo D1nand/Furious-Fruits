@@ -2070,6 +2070,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8010141173167410719, guid: 85e3931425b59984db72c5bd215bb0e4,
         type: 3}
+      propertyPath: hook
+      value: 
+      objectReference: {fileID: 895667551}
+    - target: {fileID: 8010141173167410719, guid: 85e3931425b59984db72c5bd215bb0e4,
+        type: 3}
       propertyPath: cloneSpawn
       value: 
       objectReference: {fileID: 591655085}
