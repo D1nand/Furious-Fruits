@@ -5,7 +5,7 @@ using UnityEngine;
 public class Fruit : MonoBehaviour
 {
     public Rigidbody rb;
-    public float releaseTime = 0.2f;
+    public float releaseTime = 0.1f;
     public TrailRenderer trailRenderer;
 
     private bool isPressed = false;
