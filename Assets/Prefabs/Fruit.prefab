@@ -175,6 +175,11 @@ MonoBehaviour:
   rb: {fileID: 359833542171684210}
   releaseTime: 0.3
   trailRenderer: {fileID: 8059205736010170181}
+  spawnPoint: {fileID: 7937375240762354257, guid: 3ae0eb93a2a35534e8e48f81b18ce2fb,
+    type: 3}
+  reset: 0
+  hasReleased: 0
+  hook: {fileID: 3129448734632725099, guid: fcc29e95b6653e644a63ae7015e8cec2, type: 3}
 --- !u!96 &8059205736010170181
 TrailRenderer:
   serializedVersion: 3
