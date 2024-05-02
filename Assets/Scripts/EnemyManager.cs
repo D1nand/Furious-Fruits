@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class EnemyManager : MonoBehaviour
@@ -12,6 +13,8 @@ public class EnemyManager : MonoBehaviour
     public Rigidbody hookRigidbody; // rigidbody of the hook used for clone
     public GameObject cloneSpawn;
     public GameObject gameOverCanvas;
+    public GameObject livesUI;
+    public Sprite starSpriteOutline;
 
     private bool gameOver = false;
     private bool fruitSpawned = false;
@@ -31,7 +34,7 @@ public class EnemyManager : MonoBehaviour
             StartCoroutine(SpawnFruitAfterDelay(10f)); // calls function with 10 seconds delay
             fruitSpawned = true; // changes boolean to true
         }
-        if(spawnedFruitCount >= 3)
+        if(spawnedFruitCount > 3)
         {
             gameOverCanvas.SetActive(true);
         }
@@ -43,8 +46,47 @@ public class EnemyManager : MonoBehaviour
         if (roundOver != null)
         {
             roundOver.SetActive(true); // activates canvas
+
+            // Get the panel containing the images
+            Transform panel = roundOver.transform.Find("Panel");
+
+            if (panel != null)
+            {
+                // Get the number of children (images) in the panel
+                int childCount = panel.childCount;
+
+                if (childCount > 0)
+                {
+
+                    if (spawnedFruitCount > 0)
+                    {
+                        // Access the last image
+                        Image lastImage = panel.GetChild(childCount - 1).GetComponent<Image>();
+
+                        // Change the sprite of the last image
+                        lastImage.sprite = starSpriteOutline;
+
+                        // If spawnedFruitCount is 2 or more, modify the second-to-last image
+                        if (spawnedFruitCount >= 2)
+                        {
+                            Image secondToLastImage = panel.GetChild(childCount - 2).GetComponent<Image>();
+                            secondToLastImage.sprite = starSpriteOutline;
+                        }
+
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("No images found in the panel.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Panel not found in the roundOver canvas.");
+            }
         }
     }
+
 
     IEnumerator SpawnFruitAfterDelay(float delay)
     {
@@ -76,6 +118,22 @@ public class EnemyManager : MonoBehaviour
             cameraFollow.ResetCameraPosition(); // Reset camera position to follow fruit.
 
             spawnedFruitCount++; // Increment spawned fruit count
+
+            // Find the Image component in the Canvas GameObject
+            Transform lastChild = livesUI.transform.GetChild(livesUI.transform.childCount - 1);
+
+            if (lastChild != null)
+            {
+                // Find the Image component in the last child GameObject
+                Image imageComponent = lastChild.GetComponent<Image>();
+
+                if (imageComponent != null)
+                {
+                    // to remove the last image
+                    Destroy(imageComponent.gameObject);
+
+                }
+            }
         }
         else
         {
