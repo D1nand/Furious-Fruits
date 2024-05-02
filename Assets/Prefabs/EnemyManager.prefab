@@ -46,15 +46,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 590724ef8b3a5a94db134085e51596a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundOver: {fileID: 0}
-  fruitPrefab: {fileID: 0}
-  fruit: {fileID: 0}
-  spawnPosition: {fileID: 0}
-  mainCamera: {fileID: 0}
-  cameraFollow: {fileID: 0}
-  hookRigidbody: {fileID: 0}
-  cloneSpawn: {fileID: 0}
-  gameOverCanvas: {fileID: 0}
+  roundOver: {fileID: 5680769925930892833, guid: ded0c10aceec38141a5beb5b6014164c,
+    type: 3}
+  fruitPrefab: {fileID: 4283850234288212654, guid: 85e3931425b59984db72c5bd215bb0e4,
+    type: 3}
+  fruit: {fileID: 556813715932731991, guid: 85e3931425b59984db72c5bd215bb0e4, type: 3}
+  spawnPosition: {fileID: 3730343744178621132, guid: fdd7c8300eb97e3459d112daac5eff69,
+    type: 3}
+  mainCamera: {fileID: 2777310353671783717, guid: c33735a460077564cb4cb2831a2332fe,
+    type: 3}
+  cameraFollow: {fileID: 1462081712122570447, guid: c33735a460077564cb4cb2831a2332fe,
+    type: 3}
+  hookRigidbody: {fileID: 3129448734632725099, guid: fcc29e95b6653e644a63ae7015e8cec2,
+    type: 3}
+  cloneSpawn: {fileID: 3571932977386490777, guid: fdd7c8300eb97e3459d112daac5eff69,
+    type: 3}
+  gameOverCanvas: {fileID: 6247968485243005389, guid: 269828b8fe78f9342a004884b5ec59c9,
+    type: 3}
+  livesUI: {fileID: 5935801245749025107, guid: 39425292dd971de4bbb85173463b8c3a, type: 3}
+  starSpriteOutline: {fileID: 21300000, guid: bb20f1886b8591a479e3b7d8ce892b07, type: 3}
 --- !u!1001 &1900186972890373419
 PrefabInstance:
   m_ObjectHideFlags: 0
