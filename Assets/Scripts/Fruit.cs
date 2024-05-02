@@ -42,17 +42,23 @@ public class Fruit : MonoBehaviour
     }
     void OnMouseDown()
     {
-        isPressed = true;
-        rb.isKinematic = true;
-        rb.constraints = RigidbodyConstraints.None;
+        if (!hasReleased) 
+        { 
+            isPressed = true;
+            rb.isKinematic = true;
+            rb.constraints = RigidbodyConstraints.None;
+        }
     }
 
     void OnMouseUp()
     {
-        isPressed = false;
-        rb.isKinematic = false;
+        if (!hasReleased)
+        {
+            isPressed = false;
+            rb.isKinematic = false;
 
-        StartCoroutine(Release());
+            StartCoroutine(Release());
+        }
     }
 
     IEnumerator Release()
@@ -75,6 +81,7 @@ public class Fruit : MonoBehaviour
             hasReleased = false; // Reset hasReleased flag
             trailRenderer.enabled = false; // Disable the trail renderer
             reset = true;
+            rb.constraints = RigidbodyConstraints.FreezePosition;
             springJoint = gameObject.AddComponent<SpringJoint>();
             springJoint.connectedBody = hook;
             springJoint.spring = 20f; // Set the spring strength
