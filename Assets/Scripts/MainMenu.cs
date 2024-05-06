@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync(0); // when clicked on "Play" it loads level01
+        SceneManager.LoadSceneAsync(1); // when clicked on "Play" it loads level01
     }
     public void Quit()
     {

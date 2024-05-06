@@ -34,7 +34,7 @@ public class EnemyManager : MonoBehaviour
             StartCoroutine(SpawnFruitAfterDelay(10f)); // calls function with 10 seconds delay
             fruitSpawned = true; // changes boolean to true
         }
-        if(spawnedFruitCount > 3)
+        if(spawnedFruitCount > 2 && !roundOver.activeSelf)
         {
             gameOverCanvas.SetActive(true);
         }

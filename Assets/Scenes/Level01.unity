@@ -2250,7 +2250,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedBody
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 905500469}
     - target: {fileID: 5072832929381854890, guid: 85e3931425b59984db72c5bd215bb0e4,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -2265,7 +2265,7 @@ PrefabInstance:
         type: 3}
       propertyPath: hook
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 905500469}
     - target: {fileID: 8010141173167410719, guid: 85e3931425b59984db72c5bd215bb0e4,
         type: 3}
       propertyPath: cloneSpawn
@@ -3167,6 +3167,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2292917928564800155, guid: 269828b8fe78f9342a004884b5ec59c9,
+        type: 3}
+      propertyPath: m_Name
+      value: You lost
+      objectReference: {fileID: 0}
     - target: {fileID: 4857465060890279692, guid: 269828b8fe78f9342a004884b5ec59c9,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3271,6 +3276,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameOver
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247968485243005389, guid: 269828b8fe78f9342a004884b5ec59c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8685726924352576537, guid: 269828b8fe78f9342a004884b5ec59c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
