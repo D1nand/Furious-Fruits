@@ -3335,13 +3335,13 @@ PrefabInstance:
     - target: {fileID: 5072832929381854890, guid: 85e3931425b59984db72c5bd215bb0e4,
         type: 3}
       propertyPath: m_Spring
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5072832929381854890, guid: 85e3931425b59984db72c5bd215bb0e4,
         type: 3}
       propertyPath: m_ConnectedBody
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 905500469}
     - target: {fileID: 5072832929381854890, guid: 85e3931425b59984db72c5bd215bb0e4,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -3356,7 +3356,7 @@ PrefabInstance:
         type: 3}
       propertyPath: hook
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 905500469}
     - target: {fileID: 8010141173167410719, guid: 85e3931425b59984db72c5bd215bb0e4,
         type: 3}
       propertyPath: cloneSpawn
@@ -3367,6 +3367,11 @@ PrefabInstance:
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 591655086}
+    - target: {fileID: 8010141173167410719, guid: 85e3931425b59984db72c5bd215bb0e4,
+        type: 3}
+      propertyPath: releaseTime
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8059205736010170181, guid: 85e3931425b59984db72c5bd215bb0e4,
         type: 3}
       propertyPath: m_Time
