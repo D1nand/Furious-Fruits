@@ -76,7 +76,7 @@ public class Fruit : MonoBehaviour
         {
             // Reset the position of the fruit to the spawn point
             rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;  
             transform.position = spawnPoint.position;
             hasReleased = false; // Reset hasReleased flag
             trailRenderer.enabled = false; // Disable the trail renderer
