@@ -6,13 +6,13 @@ public class Fruit : MonoBehaviour
     public Rigidbody rb;
     public float releaseTime = 0.2f;
     public TrailRenderer trailRenderer;
-    public Transform spawnPoint; // New field to hold the spawn point for the fruit
+    public Transform spawnPoint;
     public bool reset = false;
     public bool hasReleased = false;
     public Rigidbody hook;
-    public LineRenderer lineRenderer; // LineRenderer to visualize the trajectory
-    public int trajectoryResolution = 30; // Number of points in the trajectory
-    public float springForce = 50f; // Spring force of the SpringJoint
+    public LineRenderer lineRenderer;
+    public int trajectoryResolution = 30;
+    public float springForce = 50f;
 
     private bool isPressed = false;
     private SpringJoint springJoint;
@@ -22,7 +22,7 @@ public class Fruit : MonoBehaviour
         springJoint = GetComponent<SpringJoint>();
         rb.constraints = RigidbodyConstraints.FreezePosition;
         trailRenderer.enabled = false;
-        lineRenderer.positionCount = trajectoryResolution; // Initialize the line renderer
+        lineRenderer.positionCount = trajectoryResolution;
     }
 
     void Update()
@@ -90,7 +90,7 @@ public class Fruit : MonoBehaviour
         {
             // Reset the position of the fruit to the spawn point
             rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;  
+            rb.angularVelocity = Vector3.zero;
             transform.position = spawnPoint.position;
             hasReleased = false; // Reset hasReleased flag
             trailRenderer.enabled = false; // Disable the trail renderer
@@ -122,7 +122,7 @@ public class Fruit : MonoBehaviour
     Vector3 CalculateVelocity(Vector3 startPosition, Vector3 aimPosition)
     {
         // Calculate the velocity needed to reach the aim position considering the spring force
-        Vector3 direction = hook.position - startPosition;
+        Vector3 direction = aimPosition - startPosition;
         float distance = direction.magnitude;
         float mass = rb.mass;
 

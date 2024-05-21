@@ -2267,7 +2267,7 @@ PrefabInstance:
     - target: {fileID: 359833542171684210, guid: 85e3931425b59984db72c5bd215bb0e4,
         type: 3}
       propertyPath: m_Mass
-      value: 0.5 
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 359833542171684210, guid: 85e3931425b59984db72c5bd215bb0e4,
         type: 3}
@@ -2373,6 +2373,9 @@ PrefabInstance:
         type: 3}
       propertyPath: releaseTime
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010141173167410719, guid: 85e3931425b59984db72c5bd215bb0e4,
+        type: 3}
       propertyPath: lineRenderer
       value: 
       objectReference: {fileID: 2124359094}
