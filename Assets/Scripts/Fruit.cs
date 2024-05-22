@@ -30,6 +30,7 @@ public class Fruit : MonoBehaviour
         if (isPressed)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
+            mousePosition.z = transform.position.z; // Ensure the z-position matches the fruit's z-position
             rb.MovePosition(Vector3.Lerp(rb.position, mousePosition, Time.deltaTime * 10f));
 
             // Update the trajectory while aiming
@@ -122,7 +123,7 @@ public class Fruit : MonoBehaviour
     Vector3 CalculateVelocity(Vector3 startPosition, Vector3 aimPosition)
     {
         // Calculate the velocity needed to reach the aim position considering the spring force
-        Vector3 direction = hook.position - startPosition;
+        Vector3 direction = aimPosition - startPosition; // Changed to aimPosition - startPosition
         float distance = direction.magnitude;
         float mass = rb.mass;
 
