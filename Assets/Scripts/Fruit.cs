@@ -6,13 +6,13 @@ public class Fruit : MonoBehaviour
     public Rigidbody rb;
     public float releaseTime = 0.2f;
     public TrailRenderer trailRenderer;
-    public Transform spawnPoint;
+    public Transform spawnPoint; // New field to hold the spawn point for the fruit
     public bool reset = false;
     public bool hasReleased = false;
     public Rigidbody hook;
-    public LineRenderer lineRenderer;
-    public int trajectoryResolution = 30;
-    public float springForce = 50f;
+    public LineRenderer lineRenderer; // LineRenderer to visualize the trajectory
+    public int trajectoryResolution = 30; // Number of points in the trajectory
+    public float springForce = 50f; // Spring force of the SpringJoint
 
     private bool isPressed = false;
     private SpringJoint springJoint;
@@ -22,7 +22,7 @@ public class Fruit : MonoBehaviour
         springJoint = GetComponent<SpringJoint>();
         rb.constraints = RigidbodyConstraints.FreezePosition;
         trailRenderer.enabled = false;
-        lineRenderer.positionCount = trajectoryResolution;
+        lineRenderer.positionCount = trajectoryResolution; // Initialize the line renderer
     }
 
     void Update()
