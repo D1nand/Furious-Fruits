@@ -122,9 +122,8 @@ public class Fruit : MonoBehaviour
 
     Vector3 CalculateVelocity(Vector3 startPosition, Vector3 aimPosition)
     {
-        // Calculate the velocity needed to reach the aim position considering the spring force
-        Vector3 direction = aimPosition - startPosition; // Changed to aimPosition - startPosition
         Vector3 direction = aimPosition - startPosition;
+
         float distance = direction.magnitude;
         float mass = rb.mass;
 
