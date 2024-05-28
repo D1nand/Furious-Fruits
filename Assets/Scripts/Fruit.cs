@@ -6,13 +6,14 @@ public class Fruit : MonoBehaviour
     public Rigidbody rb;
     public float releaseTime = 0.2f;
     public TrailRenderer trailRenderer;
-    public Transform spawnPoint; // New field to hold the spawn point for the fruit
+    public Transform spawnPoint;
     public bool reset = false;
     public bool hasReleased = false;
     public Rigidbody hook;
-    public LineRenderer lineRenderer; // LineRenderer to visualize the trajectory
-    public int trajectoryResolution = 30; // Number of points in the trajectory
-    public float springForce = 50f; // Spring force of the SpringJoint
+    public LineRenderer lineRenderer;
+    public int trajectoryResolution = 30;
+    public float springForce = 50f;
+    public LayerMask collisionMask;
 
     private bool isPressed = false;
     private SpringJoint springJoint;
@@ -22,7 +23,7 @@ public class Fruit : MonoBehaviour
         springJoint = GetComponent<SpringJoint>();
         rb.constraints = RigidbodyConstraints.FreezePosition;
         trailRenderer.enabled = false;
-        lineRenderer.positionCount = trajectoryResolution; // Initialize the line renderer
+        lineRenderer.positionCount = trajectoryResolution;
     }
 
     void Update()
@@ -31,13 +32,10 @@ public class Fruit : MonoBehaviour
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
             rb.MovePosition(Vector3.Lerp(rb.position, mousePosition, Time.deltaTime * 10f));
-
-            // Update the trajectory while aiming
             DrawTrajectory(mousePosition);
         }
         else
         {
-            // Hide the trajectory line when not aiming
             lineRenderer.positionCount = 0;
         }
 
@@ -70,7 +68,6 @@ public class Fruit : MonoBehaviour
         {
             isPressed = false;
             rb.isKinematic = false;
-
             StartCoroutine(Release());
         }
     }
@@ -83,22 +80,20 @@ public class Fruit : MonoBehaviour
         trailRenderer.enabled = true;
         Destroy(springJoint);
 
-        // Respawn the fruit after a delay
-        yield return new WaitForSeconds(10f); // Adjust the delay as needed
+        yield return new WaitForSeconds(10f);
 
         if (!reset)
         {
-            // Reset the position of the fruit to the spawn point
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             transform.position = spawnPoint.position;
-            hasReleased = false; // Reset hasReleased flag
-            trailRenderer.enabled = false; // Disable the trail renderer
+            hasReleased = false;
+            trailRenderer.enabled = false;
             reset = true;
             rb.constraints = RigidbodyConstraints.FreezePosition;
             springJoint = gameObject.AddComponent<SpringJoint>();
             springJoint.connectedBody = hook;
-            springJoint.spring = springForce; // Set the spring strength
+            springJoint.spring = springForce;
             springJoint.autoConfigureConnectedAnchor = false;
         }
     }
@@ -108,11 +103,21 @@ public class Fruit : MonoBehaviour
         Vector3[] points = new Vector3[trajectoryResolution];
         Vector3 startingPosition = transform.position;
         Vector3 startingVelocity = CalculateVelocity(startingPosition, aimPosition);
+        points[0] = startingPosition;
 
-        for (int i = 0; i < trajectoryResolution; i++)
+        for (int i = 1; i < trajectoryResolution; i++)
         {
             float time = i * (releaseTime / trajectoryResolution);
-            points[i] = CalculatePositionAtTime(startingPosition, startingVelocity, time);
+            Vector3 point = CalculatePositionAtTime(startingPosition, startingVelocity, time);
+            points[i] = point;
+
+            if (Physics.Linecast(points[i - 1], points[i], out RaycastHit hit, collisionMask))
+            {
+                points[i] = hit.point;
+                lineRenderer.positionCount = i + 1;
+                lineRenderer.SetPositions(points);
+                return;
+            }
         }
 
         lineRenderer.positionCount = points.Length;
@@ -121,12 +126,9 @@ public class Fruit : MonoBehaviour
 
     Vector3 CalculateVelocity(Vector3 startPosition, Vector3 aimPosition)
     {
-        // Calculate the velocity needed to reach the aim position considering the spring force
-        Vector3 direction = hook.position - startPosition;
+        Vector3 direction = aimPosition - startPosition;
         float distance = direction.magnitude;
         float mass = rb.mass;
-
-        // Using Hooke's Law F = k * x => acceleration a = F / m => velocity v = sqrt(2 * a * x)
         float velocityMagnitude = Mathf.Sqrt(springForce * distance * 2 / mass);
         return direction.normalized * velocityMagnitude;
     }
