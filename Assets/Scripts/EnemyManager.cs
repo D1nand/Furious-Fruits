@@ -52,40 +52,26 @@ public class EnemyManager : MonoBehaviour
 
             if (panel != null)
             {
-                // Get the number of children (images) in the panel
-                int childCount = panel.childCount;
-
-                if (childCount > 0)
+                // Clear existing stars
+                foreach (Transform child in panel)
                 {
-
-                    if (spawnedFruitCount > 0)
-                    {
-                        // Access the last image
-                        Image lastImage = panel.GetChild(childCount - 1).GetComponent<Image>();
-
-                        // Change the sprite of the last image
-                        lastImage.sprite = starSpriteOutline;
-
-                        // If spawnedFruitCount is 2 or more, modify the second-to-last image
-                        if (spawnedFruitCount >= 2)
-                        {
-                            Image secondToLastImage = panel.GetChild(childCount - 2).GetComponent<Image>();
-                            secondToLastImage.sprite = starSpriteOutline;
-                        }
-
-                    }
+                    Destroy(child.gameObject);
                 }
-                else
+
+                int stars = FindObjectOfType<ScoreManager>().CalculateStars();
+
+                // Create stars based on the star count
+                for (int i = 0; i < stars; i++)
                 {
-                    Debug.LogWarning("No images found in the panel.");
+                    GameObject star = new GameObject("Star" + i);
+                    Image starImage = star.AddComponent<Image>();
+                    starImage.sprite = starSpriteOutline;
+                    star.transform.SetParent(panel, false);
                 }
-            }
-            else
-            {
-                Debug.LogWarning("Panel not found in the roundOver canvas.");
             }
         }
     }
+
 
 
     IEnumerator SpawnFruitAfterDelay(float delay)

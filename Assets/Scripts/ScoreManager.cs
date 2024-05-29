@@ -1,6 +1,3 @@
-using UnityEngine;
-using TMPro;
-
 public class ScoreManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText; // Reference to the UI TextMeshProUGUI element for displaying score
@@ -15,6 +12,26 @@ public class ScoreManager : MonoBehaviour
     {
         score += points; // Increase the score by the given points
         UpdateScoreUI();
+    }
+
+    public int GetScore()
+    {
+        return score;
+    }
+
+    public int CalculateStars()
+    {
+        int stars = 0;
+        int totalScore = GetScore();
+
+        if (totalScore >= 700)
+            stars = 3;
+        else if (totalScore >= 500)
+            stars = 2;
+        else if (totalScore >= 300)
+            stars = 1;
+
+        return stars;
     }
 
     void UpdateScoreUI()
