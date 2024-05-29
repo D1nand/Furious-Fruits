@@ -52,25 +52,30 @@ public class EnemyManager : MonoBehaviour
 
             if (panel != null)
             {
-                // Clear existing stars
-                foreach (Transform child in panel)
-                {
-                    Destroy(child.gameObject);
-                }
+                // Get the number of children (images) in the panel
+                int childCount = panel.childCount;
 
+                // Calculate stars based on score
                 int stars = FindObjectOfType<ScoreManager>().CalculateStars();
 
-                // Create stars based on the star count
-                for (int i = 0; i < stars; i++)
+                // Adjust existing stars based on stars earned
+                for (int i = 0; i < childCount; i++)
                 {
-                    GameObject star = new GameObject("Star" + i);
-                    Image starImage = star.AddComponent<Image>();
-                    starImage.sprite = starSpriteOutline;
-                    star.transform.SetParent(panel, false);
+                    Image starImage = panel.GetChild(i).GetComponent<Image>();
+
+                    if (stars == 1 && i >= childCount - 2)
+                    {
+                        starImage.sprite = starSpriteOutline;
+                    }
+                    else if (stars == 2 && i >= childCount - 1)
+                    {
+                        starImage.sprite = starSpriteOutline;
+                    }
                 }
             }
         }
     }
+
 
 
 

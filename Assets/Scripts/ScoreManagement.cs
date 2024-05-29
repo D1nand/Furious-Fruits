@@ -1,3 +1,7 @@
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText; // Reference to the UI TextMeshProUGUI element for displaying score
@@ -28,7 +32,7 @@ public class ScoreManager : MonoBehaviour
             stars = 3;
         else if (totalScore >= 500)
             stars = 2;
-        else if (totalScore >= 300)
+        else if (totalScore >= 100)
             stars = 1;
 
         return stars;
