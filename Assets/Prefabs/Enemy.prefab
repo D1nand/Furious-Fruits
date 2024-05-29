@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2922421022262939528}
   - component: {fileID: -8007522487637340917}
   - component: {fileID: 5231670888202599780}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,6 +129,7 @@ MonoBehaviour:
     type: 3}
   obstacleCollider: {fileID: 7583879489949942474, guid: 34104a670428d284382a4ac8641da383,
     type: 3}
+  deadlyHeight: 1
 --- !u!65 &5231670888202599780
 BoxCollider:
   m_ObjectHideFlags: 0
