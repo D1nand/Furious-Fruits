@@ -265,6 +265,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2845086000146098213, guid: 34104a670428d284382a4ac8641da383,
+        type: 3}
+      propertyPath: deadlyHeight
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8000050364221921780, guid: 34104a670428d284382a4ac8641da383,
         type: 3}
       propertyPath: m_Mass
@@ -923,6 +928,11 @@ PrefabInstance:
     - target: {fileID: 4283850234288212654, guid: 85e3931425b59984db72c5bd215bb0e4,
         type: 3}
       propertyPath: m_Name
+      value: Fruit
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283850234288212654, guid: 85e3931425b59984db72c5bd215bb0e4,
+        type: 3}
+      propertyPath: m_TagString
       value: Fruit
       objectReference: {fileID: 0}
     - target: {fileID: 5072832929381854890, guid: 85e3931425b59984db72c5bd215bb0e4,
@@ -2501,6 +2511,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1805572057}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1879371389 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6434868849148670594, guid: 933d5eb41ae955d49ad62e75a9bd31d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3195604702462187818}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1967310809 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2190372752101361697, guid: 34104a670428d284382a4ac8641da383,
@@ -2963,7 +2985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e063127bca9c7c04ca9de2d17abfdf2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
+  scoreText: {fileID: 1879371389}
 --- !u!1001 &4825874360624755608
 PrefabInstance:
   m_ObjectHideFlags: 0
