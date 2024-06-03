@@ -10,8 +10,6 @@ public class Fruit : MonoBehaviour
     public bool reset = false;
     public bool hasReleased = false;
     public Rigidbody hook;
-    public LineRenderer lineRenderer; // LineRenderer to visualize the trajectory
-    public int trajectoryResolution = 30; // Number of points in the trajectory
     public float springForce = 50f; // Spring force of the SpringJoint
 
     private bool isPressed = false;
@@ -22,7 +20,6 @@ public class Fruit : MonoBehaviour
         springJoint = GetComponent<SpringJoint>();
         rb.constraints = RigidbodyConstraints.FreezePosition;
         trailRenderer.enabled = false;
-        lineRenderer.positionCount = trajectoryResolution; // Initialize the line renderer
     }
 
     void Update()
@@ -31,14 +28,6 @@ public class Fruit : MonoBehaviour
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
             rb.MovePosition(Vector3.Lerp(rb.position, mousePosition, Time.deltaTime * 10f));
-
-            // Update the trajectory while aiming
-            DrawTrajectory(mousePosition);
-        }
-        else
-        {
-            // Hide the trajectory line when not aiming
-            lineRenderer.positionCount = 0;
         }
 
         if (reset)
@@ -101,40 +90,6 @@ public class Fruit : MonoBehaviour
             springJoint.spring = springForce; // Set the spring strength
             springJoint.autoConfigureConnectedAnchor = false;
         }
-    }
-
-    void DrawTrajectory(Vector3 aimPosition)
-    {
-        Vector3[] points = new Vector3[trajectoryResolution];
-        Vector3 startingPosition = transform.position;
-        Vector3 startingVelocity = CalculateVelocity(startingPosition, aimPosition);
-
-        for (int i = 0; i < trajectoryResolution; i++)
-        {
-            float time = i * (releaseTime / trajectoryResolution);
-            points[i] = CalculatePositionAtTime(startingPosition, startingVelocity, time);
-        }
-
-        lineRenderer.positionCount = points.Length;
-        lineRenderer.SetPositions(points);
-    }
-
-    Vector3 CalculateVelocity(Vector3 startPosition, Vector3 aimPosition)
-    {
-        // Calculate the velocity needed to reach the aim position considering the spring force
-        Vector3 direction = hook.position - startPosition;
-        float distance = direction.magnitude;
-        float mass = rb.mass;
-
-        // Using Hooke's Law F = k * x => acceleration a = F / m => velocity v = sqrt(2 * a * x)
-        float velocityMagnitude = Mathf.Sqrt(springForce * distance * 2 / mass);
-        return direction.normalized * velocityMagnitude;
-    }
-
-    Vector3 CalculatePositionAtTime(Vector3 startPosition, Vector3 startVelocity, float time)
-    {
-        Vector3 gravity = Physics.gravity;
-        return startPosition + startVelocity * time + 0.5f * gravity * time * time;
     }
 
     public bool HasReleased()
