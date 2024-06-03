@@ -7,21 +7,21 @@ public class Fruit : MonoBehaviour
     public Rigidbody rb;
     public float releaseTime = 0.2f;
     public TrailRenderer trailRenderer;
-    public Transform spawnPoint; // New field to hold the spawn point for the fruit
+    public Transform spawnPoint;
     public bool reset = false;
     public bool hasReleased = false;
     public Rigidbody hook;
-    public float springForce = 50f; // Spring force of the SpringJoint
-    public LineRenderer lineRenderer; // LineRenderer for the aiming system
-    public int lineSegmentCount = 20; // Number of segments in the line renderer
-    public float trajectoryDuration = 2f; // Duration for which to simulate the trajectory
+    public float springForce = 50f;
+    public LineRenderer lineRenderer;
+    public int lineSegmentCount = 20;
+    public float trajectoryDuration = 2f;
 
     private bool isPressed = false;
     private SpringJoint springJoint;
     private Camera mainCamera;
-    private float mass = 0.3f; // Mass of the fruit
-    private float drag = 0.3f; // Drag of the fruit
-    private float angularDrag = 1f; // Angular drag of the fruit
+    private float mass = 0.3f;
+    private float drag = 0.3f;
+    private float angularDrag = 1f;
 
     void Start()
     {
@@ -29,9 +29,8 @@ public class Fruit : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezePosition;
         trailRenderer.enabled = false;
         mainCamera = Camera.main;
-        lineRenderer.positionCount = lineSegmentCount; // Set the number of positions for the LineRenderer
+        lineRenderer.positionCount = lineSegmentCount;
 
-        // Set the Rigidbody properties
         rb.mass = mass;
         rb.drag = drag;
         rb.angularDrag = angularDrag;
@@ -44,13 +43,12 @@ public class Fruit : MonoBehaviour
             Vector3 mousePosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, mainCamera.transform.position.y));
             rb.MovePosition(Vector3.Lerp(rb.position, mousePosition, Time.deltaTime * 10f));
 
-            // Update LineRenderer positions for the trajectory
             UpdateTrajectory();
-            lineRenderer.enabled = true; // Enable the LineRenderer when aiming
+            lineRenderer.enabled = true;
         }
         else
         {
-            lineRenderer.enabled = false; // Disable the LineRenderer when not aiming
+            lineRenderer.enabled = false;
         }
 
         if (reset)
@@ -95,22 +93,20 @@ public class Fruit : MonoBehaviour
         trailRenderer.enabled = true;
         Destroy(springJoint);
 
-        // Respawn the fruit after a delay
-        yield return new WaitForSeconds(10f); // Adjust the delay as needed
+        yield return new WaitForSeconds(10f);
 
         if (!reset)
         {
-            // Reset the position of the fruit to the spawn point
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             transform.position = spawnPoint.position;
-            hasReleased = false; // Reset hasReleased flag
-            trailRenderer.enabled = false; // Disable the trail renderer
+            hasReleased = false;
+            trailRenderer.enabled = false;
             reset = true;
             rb.constraints = RigidbodyConstraints.FreezePosition;
             springJoint = gameObject.AddComponent<SpringJoint>();
             springJoint.connectedBody = hook;
-            springJoint.spring = springForce; // Set the spring strength
+            springJoint.spring = springForce;
             springJoint.autoConfigureConnectedAnchor = false;
         }
     }
@@ -127,26 +123,34 @@ public class Fruit : MonoBehaviour
 
     void UpdateTrajectory()
     {
-        Vector3 velocity = (hook.position - transform.position) * springForce / mass;
         Vector3 currentPosition = transform.position;
+        Vector3 currentVelocity = (hook.position - transform.position) * springForce / mass;
 
-        for (int i = 0; i < lineSegmentCount; i++)
+        Vector3[] points = new Vector3[lineSegmentCount];
+        points[0] = currentPosition;
+
+        float timeStep = trajectoryDuration / (float)lineSegmentCount;
+        for (int i = 1; i < lineSegmentCount; i++)
         {
-            float simulationTime = i / (float)lineSegmentCount * trajectoryDuration;
-            Vector3 displacement = CalculateDisplacement(velocity, simulationTime);
-            Vector3 drawPoint = currentPosition + displacement;
-            lineRenderer.SetPosition(i, drawPoint);
+            float currentTime = i * timeStep;
+            Vector3 displacement = currentVelocity * currentTime + 0.5f * Physics.gravity * currentTime * currentTime;
+            points[i] = currentPosition + displacement;
         }
+
+        lineRenderer.positionCount = points.Length;
+        lineRenderer.SetPositions(points);
     }
+
+
 
     Vector3 CalculateDisplacement(Vector3 initialVelocity, float time)
     {
-        // Calculate the drag force
-        float dragFactor = Mathf.Exp(-drag * time / mass);
-        // Calculate the velocity considering drag
-        Vector3 velocityWithDrag = initialVelocity * dragFactor;
-        // Calculate the displacement considering gravity and drag
-        Vector3 displacement = velocityWithDrag * time + 0.5f * Physics.gravity * time * time;
+        Vector3 gravity = Physics.gravity;
+        Vector3 dragForce = -rb.velocity.normalized * drag * rb.velocity.magnitude;
+        Vector3 acceleration = gravity + (dragForce / mass);
+        Vector3 displacement = initialVelocity * time + 0.5f * acceleration * time * time;
         return displacement;
     }
+
+
 }

@@ -938,7 +938,7 @@ PrefabInstance:
     - target: {fileID: 5072832929381854890, guid: 85e3931425b59984db72c5bd215bb0e4,
         type: 3}
       propertyPath: m_Spring
-      value: 50
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5072832929381854890, guid: 85e3931425b59984db72c5bd215bb0e4,
         type: 3}
