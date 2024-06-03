@@ -24,7 +24,7 @@ public class ObstacleScript : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        // Check if the obstacle was hit by an object tagged as "Ball"
+        // Check if the obstacle was hit by an object tagged as "Fruit"
         if (collision.collider.CompareTag("Fruit"))
         {
             HandleDestruction();

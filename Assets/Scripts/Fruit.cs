@@ -106,7 +106,7 @@ public class Fruit : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezePosition;
             springJoint = gameObject.AddComponent<SpringJoint>();
             springJoint.connectedBody = hook;
-            springJoint.spring = springForce;
+            springJoint.spring = 200f;
             springJoint.autoConfigureConnectedAnchor = false;
         }
     }

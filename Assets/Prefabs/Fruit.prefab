@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 7476285522351660464}
   m_Layer: 0
   m_Name: Fruit
-  m_TagString: Untagged
+  m_TagString: Fruit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,13 +144,14 @@ SpringJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4283850234288212654}
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 3129448734632725099, guid: fcc29e95b6653e644a63ae7015e8cec2,
+    type: 3}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.49999997, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: -0.087, y: 0.1500001, z: 0}
   serializedVersion: 2
-  m_Spring: 20
+  m_Spring: 200
   m_Damper: 0.2
   m_MinDistance: 0
   m_MaxDistance: 0
@@ -174,15 +175,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 359833542171684210}
-  releaseTime: 0.3
+  releaseTime: 0.1
   trailRenderer: {fileID: 8059205736010170181}
-  spawnPoint: {fileID: 0}
+  spawnPoint: {fileID: 3730343744178621132, guid: fdd7c8300eb97e3459d112daac5eff69,
+    type: 3}
   reset: 0
   hasReleased: 0
-  hook: {fileID: 0}
-  lineRenderer: {fileID: 7476285522351660464}
-  trajectoryResolution: 30
+  hook: {fileID: 3129448734632725099, guid: fcc29e95b6653e644a63ae7015e8cec2, type: 3}
   springForce: 50
+  lineRenderer: {fileID: 7476285522351660464}
+  lineSegmentCount: 20
+  trajectoryDuration: 2
 --- !u!96 &8059205736010170181
 TrailRenderer:
   serializedVersion: 3
@@ -308,7 +311,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 43f05e30d507af34393f690b8a635be7, type: 2}
+  - {fileID: 2100000, guid: a9cb32890d992534fbdc9c1aa3f99912, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
